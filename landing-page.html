@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEHELKA007 Official | WhatsApp</title>
+  <meta name="description" content="Chat with TEHELKA007 Official on WhatsApp. Click to continue the conversation." />
+  <style>
+    :root {
+      --background: #ffffff;
+      --foreground: #111b21;
+      --muted: #f0f2f5;
+      --muted-foreground: #667781;
+      --primary: #25d366;
+      --primary-foreground: #ffffff;
+      --border: #d1d7db;
+      --input: #d1d7db;
+      --ring: #25d366;
+      --gold: #d4af37;
+      --radius: 0.625rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+      border-bottom: 1px solid var(--border);
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 80rem;
+      margin: 0 auto;
+      display: flex;
+      height: 4rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo svg {
+      width: 2rem;
+      height: 2rem;
+      color: var(--primary);
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    .nav {
+      display: none;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav a:hover {
+      color: var(--primary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 9999px;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-outline {
+      border-color: var(--input);
+      background-color: transparent;
+      color: var(--foreground);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--muted);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background-color: #1da851;
+    }
+
+    .btn-lg {
+      height: 3rem;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--foreground);
+      border-color: var(--foreground);
+    }
+
+    .btn-ghost:hover {
+      background-color: var(--muted);
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 28rem;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 7rem;
+      height: 7rem;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .title {
+      margin-top: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+    }
+
+    .title span {
+      font-weight: 400;
+      color: var(--muted-foreground);
+    }
+
+    .message-bubble {
+      margin-top: 2rem;
+      width: 100%;
+      border-radius: 1rem;
+      background-color: var(--muted);
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .message-bubble p {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .actions {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-link {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--foreground);
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    .footer-link svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--primary);
+    }
+
+    .footer-link .highlight {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    @media (min-width: 640px) {
+      .header-inner {
+        padding: 0 1.5rem;
+      }
+
+      .nav {
+        display: flex;
+      }
+
+      .btn-login {
+        display: inline-flex;
+      }
+
+      .avatar {
+        width: 8rem;
+        height: 8rem;
+      }
+
+      .title {
+        font-size: 1.875rem;
+      }
+
+      .message-bubble p {
+        font-size: 1.125rem;
+      }
+    }
+
+    @media (max-width: 639px) {
+      .btn-login {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.13 1.588 5.931L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+        <span class="logo-text">WhatsApp</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#">Features</a>
+        <a href="#">Privacy</a>
+        <a href="#">Blog</a>
+        <a href="#">Apps</a>
+        <a href="#">Help Center</a>
+        <a href="#">For Business</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#" class="btn btn-outline btn-login">Log In</a>
+        <a href="#" class="btn btn-primary">Download</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="card">
+      <div class="avatar">
+        <img src="https://id-preview--de13dd07-1f1e-4afa-9756-9071281f3aae.lovable.app/tehelka-badge.png" alt="TEHELKA007 Official profile badge" />
+      </div>
+
+      <h1 class="title">TEHELKA007 <span>Official</span></h1>
+
+      <div class="message-bubble">
+        <p>Hi Sir I Want To Know More about Tehelka007</p>
+      </div>
+
+      <div class="actions">
+        <a href="#" class="btn btn-primary btn-lg">Open app</a>
+        <a href="https://wa.link/iwa7wp" class="btn btn-ghost btn-lg">Continue to WhatsApp Web</a>
+      </div>
+
+      <a href="#" class="footer-link">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.13 1.588 5.931L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+        Don't have the app?
+        <span class="highlight">Download it now</span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
