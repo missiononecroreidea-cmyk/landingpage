@@ -7,71 +7,125 @@
   <meta name="description" content="Chat with TEHELKA007 Official on WhatsApp. Click to continue the conversation." />
 
   <!-- =====================================================
-       META PIXEL CODE
-       PIXEL 1: 1132975426575586
-       PIXEL 2: 4501986286789941
+       META PIXEL - DYNAMIC PIXEL ROUTING
+
+       Account 1:
+       Pixel = 1132975426575586
+       URL = ?source=account1
+
+       Account 2:
+       Pixel = 4501986286789941
+       URL = ?source=account2
+
+       ONLY ONE PIXEL WILL BE INITIALIZED PER VISITOR
        ===================================================== -->
 
   <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
+    /* =====================================================
+       GET SOURCE FROM URL
+       ===================================================== */
 
-  /* PIXEL 1 */
-  fbq('init', '1132975426575586');
+    const urlParams = new URLSearchParams(window.location.search);
+    const source = urlParams.get('source');
 
-  /* PIXEL 2 */
-  fbq('init', '4501986286789941');
+    /* =====================================================
+       PIXEL IDs
+       ===================================================== */
 
-  /* PAGEVIEW - BOTH PIXELS */
-  fbq('track', 'PageView');
+    const PIXEL_ACCOUNT_1 = '1132975426575586';
+    const PIXEL_ACCOUNT_2 = '4501986286789941';
+
+    let ACTIVE_PIXEL = null;
+
+    /* =====================================================
+       SELECT ONLY ONE PIXEL
+       ===================================================== */
+
+    if (source === 'account1') {
+      ACTIVE_PIXEL = PIXEL_ACCOUNT_1;
+    }
+
+    if (source === 'account2') {
+      ACTIVE_PIXEL = PIXEL_ACCOUNT_2;
+    }
+
+    /* =====================================================
+       LOAD META PIXEL ONLY IF VALID SOURCE EXISTS
+       ===================================================== */
+
+    if (ACTIVE_PIXEL) {
+
+      !function(f,b,e,v,n,t,s)
+      {
+        if(f.fbq)return;
+
+        n=f.fbq=function(){
+          n.callMethod ?
+          n.callMethod.apply(n,arguments) :
+          n.queue.push(arguments)
+        };
+
+        if(!f._fbq)f._fbq=n;
+
+        n.push=n;
+        n.loaded=!0;
+        n.version='2.0';
+        n.queue=[];
+
+        t=b.createElement(e);
+        t.async=!0;
+        t.src=v;
+
+        s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s);
+
+      }(
+        window,
+        document,
+        'script',
+        'https://connect.facebook.net/en_US/fbevents.js'
+      );
+
+      /* Initialize ONLY selected Pixel */
+      fbq('init', ACTIVE_PIXEL);
+
+      /* PageView */
+      fbq('track', 'PageView');
+    }
   </script>
 
-  <!-- PIXEL 1 NOSCRIPT -->
-  <noscript>
-    <img
-      height="1"
-      width="1"
-      style="display:none"
-      src="https://www.facebook.com/tr?id=1132975426575586&ev=PageView&noscript=1"
-      alt=""
-    />
-  </noscript>
-
-  <!-- PIXEL 2 NOSCRIPT -->
-  <noscript>
-    <img
-      height="1"
-      width="1"
-      style="display:none"
-      src="https://www.facebook.com/tr?id=4501986286789941&ev=PageView&noscript=1"
-      alt=""
-    />
-  </noscript>
 
   <!-- =====================================================
-       LEAD TRACKING
-       ONLY WHATSAPP BUTTONS WILL USE THIS
+       LEAD TRACKING FUNCTION
+
+       ONLY TWO WHATSAPP BUTTONS USE THIS FUNCTION
        ===================================================== -->
 
   <script>
     function trackWhatsAppLead(event) {
+
       event.preventDefault();
 
-      /* Send Lead event to both initialized Pixels */
-      fbq('track', 'Lead');
+      /* Make sure a valid Pixel is active */
+      if (typeof fbq === 'function' && ACTIVE_PIXEL) {
 
-      /* Redirect to WhatsApp after event fires */
-      setTimeout(function() {
+        /* Send Lead ONLY to the active Pixel */
+        fbq('track', 'Lead');
+
+        /* Redirect after tracking */
+        setTimeout(function() {
+          window.location.href = 'https://wa.link/iwa7wp';
+        }, 500);
+
+      } else {
+
+        /* If no valid source/pixel, still open WhatsApp */
         window.location.href = 'https://wa.link/iwa7wp';
-      }, 500);
+
+      }
     }
   </script>
+
 
   <style>
     :root {
@@ -355,7 +409,6 @@
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.13 1.588 5.931L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
         </svg>
-
         <span class="logo-text">WhatsApp</span>
       </a>
 
@@ -370,12 +423,12 @@
 
       <div class="header-actions">
 
-        <!-- DOWNLOAD - NO LEAD EVENT -->
+        <!-- LOG IN - NO LEAD -->
         <a href="#" class="btn btn-outline btn-login">
           Log In
         </a>
 
-        <!-- DOWNLOAD - NO LEAD EVENT -->
+        <!-- DOWNLOAD - NO LEAD -->
         <a href="#" class="btn btn-primary">
           Download
         </a>
@@ -386,7 +439,6 @@
 
 
   <main class="main">
-
     <div class="card">
 
       <div class="avatar">
@@ -408,7 +460,7 @@
 
         <!-- =================================================
              OPEN APP
-             ONLY THIS BUTTON FIRES LEAD
+             LEAD TRACKING ENABLED
              ================================================= -->
 
         <a
@@ -422,7 +474,7 @@
 
         <!-- =================================================
              CONTINUE TO WHATSAPP WEB
-             ONLY THIS BUTTON FIRES LEAD
+             LEAD TRACKING ENABLED
              ================================================= -->
 
         <a
@@ -436,27 +488,20 @@
       </div>
 
 
-      <!-- =================================================
-           FOOTER DOWNLOAD
-           NO LEAD EVENT
-           ================================================= -->
+      <!-- FOOTER - NO LEAD TRACKING -->
 
       <a href="#" class="footer-link">
 
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.198.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.13 1.588 5.931L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.199-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.13 1.588 5.931L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
         </svg>
 
         Don't have the app?
-
-        <span class="highlight">
-          Download it now
-        </span>
+        <span class="highlight">Download it now</span>
 
       </a>
 
     </div>
-
   </main>
 
 </body>
